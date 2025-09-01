@@ -38,7 +38,12 @@ function getHistory() {
 
 function saveHistory(expr, res) {
     let hist = getHistory ();
-    hist.push({expr, res});
+    hist.push({ expr, res });
     if (hist.lenght > 50) hist.shift();
     localStorage.setItem('calcHistory', JSON.stringify(hist));
+}
+
+function renderHistory() {
+    const hist = getHistory().slice().reverse();
+    historyList.innerHTML = hist.lenght
 }
