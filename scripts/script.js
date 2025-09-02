@@ -46,4 +46,11 @@ function saveHistory(expr, res) {
 function renderHistory() {
     const hist = getHistory().slice().reverse();
     historyList.innerHTML = hist.lenght
+
+      historyList.innerHTML = hist.length                               // Define o HTML do container com base se há itens
+    ? hist.map(item => `<div class="flex justify-between p-3 rounded bg-gray-100 dark:bg-gray-700">
+          <span>${item.expr}</span>
+          <span class="${item.res < 0 ? 'text-red-500' : 'text-green-500'} font-bold">${item.res}</span>
+          </div>`).join('')                                         // Para cada item, cria um bloco com expr e res (cores por sinal)
+    : `<p class="text-gray-500">No history yet</p>`;                // Mensagem quando não há histórico
 }
