@@ -54,3 +54,27 @@ function renderHistory() {
           </div>`).join('')                                         // Para cada item, cria um bloco com expr e res (cores por sinal)
     : `<p class="text-gray-500">No history yet</p>`;                // Mensagem quando não há histórico
 }
+
+historyBtn.onclick = () => {
+    renderHistory();
+    historyPanel.classList.remove('translate-y-full', 'sm:translate-x-full');
+};
+
+closeHistory.onclick = () => {
+    historyPanel.classList.add('translate-y-full', 'sm:translate-x-full');
+};
+
+clearHistory.onclick = () => {
+    localStorage.removeItem('calcHistory');
+    renderHistory();    
+};
+
+// LÓGICA CALCULADORA
+
+ function calculate(expr) {
+    try {
+        const tokens = expr.match(/(\d+(\.\d+)?|[+\-*/%()])/g);
+        const prec = {'+': 1, '-': 1, '*':2, '/':2, '%':2};
+    }
+ }
+
