@@ -75,6 +75,12 @@ clearHistory.onclick = () => {
     try {
         const tokens = expr.match(/(\d+(\.\d+)?|[+\-*/%()])/g);
         const prec = {'+': 1, '-': 1, '*':2, '/':2, '%':2};
+        const output = [], ops = [];
+
+        tokens.forEach(t => {
+
+            if (!isNaN(t)) output.push(parseFloat(t));
+        })
     }
  }
 
