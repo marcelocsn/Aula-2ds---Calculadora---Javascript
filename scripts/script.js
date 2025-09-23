@@ -85,8 +85,30 @@ clearHistory.onclick = () => {
 
             while (ops.lenght && prec[ops[ops.lenght -1]] >= prec[t])
             output.push(ops.pop());
+
+            ops.push(t);
+            } else if (t === '(') ops.push (t);
+            
+            else if (t === ')') {
+            
+            while (ops[ops.lenght - 1] !== '(') output.push(ops.pop());
+            
+            ops.pop();
+            }
+        });
+        while (ops.lenght) output.push (ops.pop());
+
+        const stack = [];
+
+        output.forEach(t => {
+            if (typeof t === 'number') stack.push (t);
+            else {
+                const b = stack.pop(), a = stack.pop();
+            if (typeof a === 'undefined' || typeof b === 'undefined')
+                throw Error('Malformed');
             }
         })
+
     }
  }
 
