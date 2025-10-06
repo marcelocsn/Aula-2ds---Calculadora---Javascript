@@ -106,9 +106,41 @@ clearHistory.onclick = () => {
                 const b = stack.pop(), a = stack.pop();
             if (typeof a === 'undefined' || typeof b === 'undefined')
                 throw Error('Malformed');
-            }
-        })
 
+            if (t === '+') stack.push (a + b);
+
+            if (t === '-') stack.push (a - b);
+
+            if (t === '*') stack.push (a * b);
+
+            if (t === '/') stack.push (a / b);
+
+            if (t === '%') stack.push (a % b);
+            }
+        });
+        return stack [0];
+
+    } catch {
+        return 'Err';
     }
  }
+ buttons.forEach (b => {
+    b.onclick = () => {
+        const val = b.value;
 
+        if (val === '=') {
+            const res = calculate(screen.value);
+
+            if (!isNaN(res)) {
+                saveHistory(screen.value, res);
+                screen.value =  Number.isInteger(res) ? res: res.toFixed(2);
+            } else {
+                screen.value = 'Err';
+            }
+        } else if (val === 'C') {
+            screen.value = '';
+        } else {
+            screen.value += val;
+        }
+    };
+ });
