@@ -144,3 +144,43 @@ clearHistory.onclick = () => {
         }
     };
  });
+
+document.addEventListener('keydown', e => {
+    if (/[0-9+\-*/%.()]/.test(e.key)
+) {
+    screen.value += e.key;
+    return;
+}
+if (e.key === 'Enter' || e.key === '=') {
+
+    const res = calculate(screen.value);
+    if (!isNaN(res)) {
+
+        saveHistory(screen.value, res);
+
+        screen.value = Number.isInteger(res) ? res : res.toFixed(2);
+
+    } else {
+        screen.value = 'Err';
+    }
+    e.preventDefault();
+    }
+    if (e.key === 'Backspace') {
+        screen.value = screen.value.slice(0,-1);
+        e.preventDefault();
+    }
+    if (e.key.toLowerCase() === 'd')
+    {
+        const newMode = document.documentElement.classList.contains ('dark') ? 'light' : 'dark';
+        setTheme(newMode);
+        e.preventDefault();
+    }
+    if (e.key.toLowerCase() === 'h') 
+    {
+        historyPanel.classList.contains ('translate-y-full') || historyPanel.classList.contains('sm:translate-x-full')
+        ? historyPanel.classList.remove('translate-y-full, sm:translate-x-full')
+        : historyPanel.classList.add('translate-y-full, sm:translate-x-full');
+        e.preventDefault();
+    }
+}
+};
